@@ -11,7 +11,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ### Introduction
 
-In December 2019, the outbreak of the pandemic started to spread globally at first sight from China. In order to suppress the spread of the virus via minimized transmission rates, the large-scale lockdown policy was implemented worldwide with travel restriction orders and business close-down measures. Effectiveness of the lockdown policy has been widely studied and proved to be evident with reduced air pollution across the globe. Changes in human mobility and living patterns have given rise to substantial improvements in air quality status globally. The efforts to control coronavirus did result in a drop in primary gaseous pollutants. We have investigated some air quality data to provide an illustration of this issue. In this project, Air Quality Index (AQI) values were chosen, which is a dimensionless index describing the comprehensive condition of urban ambient air quality, and it takes into account the pollution level of six pollutants such as SO2, NO2, PM10, PM2.5, CO, O3, etc. The larger the AQI value is, the heavier the comprehensive pollution level is. This leaflet is designed to show the detail.
+The outbreak of the pandemic started to spread globally at first sight from China in December 2019, the large-scale lockdown policy to reduce the virus's transmission rates in order to stop the spread of the disease was implemented worldwide with travel restriction orders and business close-down measures. Effectiveness of the lockdown policy has been widely studied and proved to be evident with reduced air pollution across the globe. Changes in human mobility and living patterns have given rise to substantial improvements in air quality status globally. The principal gaseous pollutants did decrease as a result of the coronavirus management measures. We have investigated some air quality data to provide an illustration of this issue. In this project, the index, Air Quality Index (AQI) values were chosen, which is a dimensionless index describing the comprehensive condition of urban ambient air quality, and it takes into account the pollution level of six pollutants such as SO2, NO2, PM10, PM2.5, CO, O3, etc. The larger the AQI value is, the heavier the comprehensive pollution level is. This leaflet is designed to show the detail.
 
 First we load the package and data.
 ```{r, echo=FALSE}
@@ -51,6 +51,8 @@ leaflet(df) %>%
                     label=~as.character(Index1))
 ```
 
+We can see that the index has fallen in almost all cities, with a significant drop in northern China. This is the first month of the policy implantation and we can see the effects are obvious.
+
 The second map shows us the changes in February and March.
 
 ```{r, echo=FALSE}
@@ -80,6 +82,8 @@ leaflet(df) %>%
                     label=~as.character(Index2))
 ```
 
+Low air quality in more than half of the cities, evidence of additional harmful emissions from people's activities.
+
 The final map shows us the changes in March and April.
 
 ```{r, echo=FALSE}
@@ -108,3 +112,5 @@ leaflet(df) %>%
   addAwesomeMarkers(~lng, ~lat, icon=icons,
                     label=~as.character(Index3))
 ```
+
+Most cities have returned to normal air quality values due to re-opening.
