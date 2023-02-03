@@ -1,0 +1,110 @@
+---
+title: "Extraction and visualisation of air quality data during pandemic"
+author: "Xinyu GUO"
+date: "2023-02-01"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### Introduction
+
+In December 2019, the outbreak of the pandemic started to spread globally at first sight from China. In order to suppress the spread of the virus via minimized transmission rates, the large-scale lockdown policy was implemented worldwide with travel restriction orders and business close-down measures. Effectiveness of the lockdown policy has been widely studied and proved to be evident with reduced air pollution across the globe. Changes in human mobility and living patterns have given rise to substantial improvements in air quality status globally. The efforts to control coronavirus did result in a drop in primary gaseous pollutants. We have investigated some air quality data to provide an illustration of this issue. In this project, Air Quality Index (AQI) values were chosen, which is a dimensionless index describing the comprehensive condition of urban ambient air quality, and it takes into account the pollution level of six pollutants such as SO2, NO2, PM10, PM2.5, CO, O3, etc. The larger the AQI value is, the heavier the comprehensive pollution level is. This leaflet is designed to show the detail.
+
+First we load the package and data.
+```{r, echo=FALSE}
+library(leaflet)
+df <- read.csv('C:\\Users\\G\\Desktop\\mapdata.csv',header=TRUE)
+
+```
+
+Next, we draw the map. To show the distinction of Air Quality Index (AQI) values, we calculate the difference between adjacent two months. Furthermore, in order to distinguish the difference of index,the function, getColor, is used to realized the goal. If the value falls by more than 1, we mark it as green, increase less than 1 with beige, and red is used to indicate an increase in value.
+
+The first map shows us the changes in January and February 2020.
+
+```{r, echo=FALSE}
+df <- df
+
+getColor <- function(df) {
+  sapply(df$Index1, function(Index1) {
+  if(Index1 > 1.3) {
+    "green"
+  } else if(Index1 < 0.1) {
+    "red"
+  } else {
+    "beige"
+  } })
+}
+
+icons <- awesomeIcons(
+  icon = 'ios-close',
+  iconColor = 'black',
+  library = 'ion',
+  markerColor = getColor(df)
+)
+
+leaflet(df) %>% 
+  addTiles() %>%
+  addAwesomeMarkers(~lng, ~lat, icon=icons,
+                    label=~as.character(Index1))
+```
+
+The second map shows us the changes in February and March.
+
+```{r, echo=FALSE}
+df <- df
+
+getColor <- function(df) {
+  sapply(df$Index2, function(Index2) {
+  if(Index2 > 1.3) {
+    "green"
+  } else if(Index2 < 0.1) {
+    "red"
+  } else {
+    "beige"
+  } })
+}
+
+icons <- awesomeIcons(
+  icon = 'ios-close',
+  iconColor = 'black',
+  library = 'ion',
+  markerColor = getColor(df)
+)
+
+leaflet(df) %>% 
+  addTiles() %>%
+  addAwesomeMarkers(~lng, ~lat, icon=icons,
+                    label=~as.character(Index2))
+```
+
+The final map shows us the changes in March and April.
+
+```{r, echo=FALSE}
+df <- df
+
+getColor <- function(df) {
+  sapply(df$Index3, function(Index3) {
+  if(Index3 > 1) {
+    "green"
+  } else if(Index3 < 0) {
+    "red"
+  } else {
+    "beige"
+  } })
+}
+
+icons <- awesomeIcons(
+  icon = 'ios-close',
+  iconColor = 'black',
+  library = 'ion',
+  markerColor = getColor(df)
+)
+
+leaflet(df) %>% 
+  addTiles() %>%
+  addAwesomeMarkers(~lng, ~lat, icon=icons,
+                    label=~as.character(Index3))
+```
